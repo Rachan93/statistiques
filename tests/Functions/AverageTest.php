@@ -8,3 +8,12 @@ test('moyenne', function () {
 
     expect(Average::calculate($list))->toBe(15.0);
 });
+
+
+test('moyenne sans input', function () {
+    $list = [];
+
+    expect(function() use ($list) {
+        Average::calculate($list);
+    })->toThrow(Exception::class);
+});
