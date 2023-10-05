@@ -17,7 +17,7 @@ class Average {
 }
 
 try {
-    $numbers = []; 
+    $numbers = [5,10,5]; 
     $result = Average::calculate($numbers);
     echo "The average is: $result";
 } catch (\Exception $e) {
