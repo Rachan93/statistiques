@@ -5,9 +5,15 @@ namespace Rachan93\Statistiques\Functions;
 class StandardDeviation {
     public static function calculate(array $numbers): float
     {
-        if (empty($numbers)) {
+        if (count($numbers) === 0) {
             throw new \Exception("The provided array is empty.");
-        }
+        
+        }foreach($numbers as $value){
+            
+            if(is_numeric($value) !== true){
+                 throw new \Exception("The provided array contains non-numeric values.");
+             }
+         }
 
         $mean = array_sum($numbers) / count($numbers);
 
@@ -19,11 +25,4 @@ class StandardDeviation {
 
         return sqrt($variance);
     }
-}
-try {
-    $numbers = [10, 5, 8, 3, 7];
-    $result = StandardDeviation::calculate($numbers);
-    echo "The standard deviation is: $result";
-} catch (\Exception $e) {
-    echo "Error: " . $e->getMessage();
 }

@@ -5,9 +5,18 @@ namespace Rachan93\Statistiques\Functions;
 class Average {
     public static function calculate(array $numbers): float
     {
-        if (empty($numbers)) {
+        if (count($numbers) === 0) {
             throw new \Exception("The provided array is empty.");
+        
+        }foreach($numbers as $value){
+            
+            $numeric = ['integer', 'double'];
+            
+            if(!in_array(gettype($value),$numeric)){ //j'avais oublié l'existence de is_numeric, mais bon on s'en tape :)
+                throw new \Exception("The provided array contains non-numeric values.");
+            }
         }
+        
 
         $sum = array_sum($numbers);
         $count = count($numbers);
@@ -16,10 +25,3 @@ class Average {
     }
 }
 
-try {
-    $numbers = [5,10,5]; 
-    $result = Average::calculate($numbers);
-    echo "The average is: $result";
-} catch (\Exception $e) {
-    echo "Error: " . $e->getMessage();
-}
